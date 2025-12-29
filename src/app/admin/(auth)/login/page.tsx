@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { useEffect } from "react";
+import Cookies from "js-cookie";
 
 // Simple device ID generator (replace with a better implementation if needed)
 function getDeviceId(): string {
@@ -33,39 +34,47 @@ useEffect(() => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError(null);
-    setLoading(true);
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setError(null);
+  setLoading(true);
 
-    try {
-      const res = await fetch("http://localhost:8080/api/auth/admin/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email,
-          password,
-          deviceId
-        }),
-      });
+  try {
+    const res = await fetch("http://localhost:8080/api/auth/admin/login", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  credentials: "include", // REQUIRED
+  body: JSON.stringify({
+    identifier: email,
+    password
+  }),
+});
 
-      if (!res.ok) {
-        throw new Error("Invalid email or password");
-      }
+if (!res.ok) {
+  throw new Error("Invalid email or password");
+}
 
-      const data = await res.json();
-      login(data.accessToken, data.refreshToken);
-      router.push("/admin");
-    } catch (err: unknown) {
-      if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        setError("Login failed");
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
+// No token reading
+const data = await res.json();
+
+login({
+  id: data.userId,
+  name: data.name,
+  email: data.email,
+  role: data.role,
+});
+
+router.push("/admin/dashboard");
+
+
+
+  } catch (err) {
+    setError(err instanceof Error ? err.message : "Login failed");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#f6f7f5] px-4">

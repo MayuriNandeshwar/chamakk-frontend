@@ -1,46 +1,29 @@
-"use client";
+import type { ReactNode } from "react";
+import AdminSidebar from "@/components/admin/layout/AdminSidebar";
+import AdminHeader from "@/components/admin/layout/AdminHeader";
 
-import React from "react";
-import AppHeader from "@/layout/AppHeader";
-import AppSidebar from "@/layout/AppSidebar";
-import Backdrop from "@/layout/Backdrop";
-import { useSidebar } from "@/context/SidebarContext";
+interface AdminDashboardLayoutProps {
+  children: ReactNode;
+}
 
-function AdminLayoutContent({ children }: { children: React.ReactNode }) {
-  const { isExpanded, isHovered, isMobileOpen } = useSidebar();
-
-  const mainContentMargin = isMobileOpen
-    ? "ml-0"
-    : isExpanded || isHovered
-    ? "lg:ml-[290px]"
-    : "lg:ml-[90px]";
-
+export default function AdminDashboardLayout({
+  children,
+}: AdminDashboardLayoutProps) {
   return (
-    <div className="min-h-screen flex bg-gray-50">
+    <div className="flex min-h-screen bg-gray-100">
       {/* Sidebar */}
-      <AppSidebar />
+      <AdminSidebar />
 
-      {/* Mobile Backdrop */}
-      <Backdrop />
+      {/* Main content area */}
+      <div className="flex flex-col flex-1">
+        {/* Top Header */}
+        <AdminHeader />
 
-      {/* Main Content */}
-      <div
-        className={`flex-1 transition-all duration-300 ease-in-out ${mainContentMargin}`}
-      >
-        <AppHeader />
-
-        <main className="p-4 mx-auto max-w-screen-2xl md:p-6">
+        {/* Page Content */}
+        <main className="flex-1 p-6 overflow-y-auto">
           {children}
         </main>
       </div>
     </div>
   );
-}
-
-export default function AdminLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return <AdminLayoutContent>{children}</AdminLayoutContent>;
 }
