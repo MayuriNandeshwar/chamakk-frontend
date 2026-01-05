@@ -1,77 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Epilogue:wght@300;400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* CSS variables for background */
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-.dark {
-  --background: #0a0a0a;
-  --foreground: #ededed;
-}
-
-/* Base styles */
 @layer base {
+  :root {
+    --background: hsl(0 0% 100%);
+    --foreground: hsl(222.2 84% 4.9%);
+
+    /* TEXT SYSTEM (BLACK @ ALPHA) */
+      --text-black: rgba(0, 0, 0, 0.9);
+      --text-secondary: rgba(0, 0, 0, 0.8);
+      --text-muted: rgba(0, 0, 0, 0.6);
+
+    --border: hsl(240 5.9% 90%);
+    --input: hsl(240 5.9% 90%);
+    --ring: hsl(240 5.9% 90%);
+  }
+
   body {
-    background-color: var(--background);
-    color: var(--foreground);
-    font-family: "Outfit", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    @apply bg-[var(--background)] text-[var(--foreground)] font-epilogue;
+  }
+    /* Heading defaults */
+        /* Fonts only — NO color here */
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+          @apply font-playfair;
+        }
+}
+
+@keyframes chamakk-conveyor {
+  from {
+    transform: translateX(0);
   }
 
-  *,
-  ::before,
-  ::after {
-    border-color: #e5e7eb;
-    /* gray-200 */
+  to {
+    transform: translateX(-33.3333%);
   }
 }
 
-/* Sidebar utilities (converted from @utility) */
-@layer utilities {
-  .menu-item {
-    @apply flex items-center gap-3 px-3 py-2 rounded-lg font-medium text-sm;
-  }
+.chamakk-track {
+  display: flex;
+  width: max-content;
+  animation: chamakk-conveyor 60s linear infinite;
 
-  .menu-item-active {
-    @apply bg-brand-50 text-brand-500 dark:bg-brand-500/15 dark:text-brand-400;
-  }
-
-  .menu-item-inactive {
-    @apply text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-white/5;
-  }
-
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-
-  .custom-scrollbar::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    @apply bg-gray-300 dark:bg-gray-700 rounded-full;
-  }
-}
-
-/* Charts overrides */
-.apexcharts-text,
-.apexcharts-legend-text {
-  @apply text-gray-700 dark:text-gray-400;
-}
-
-.apexcharts-gridline {
-  @apply stroke-gray-100 dark:stroke-gray-800;
-}
-
-/* Calendar overrides */
-.flatpickr-calendar {
-  @apply bg-white dark:bg-gray-900 p-5 rounded-xl border border-gray-200 dark:border-gray-700;
+  /* Rendering quality */
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }

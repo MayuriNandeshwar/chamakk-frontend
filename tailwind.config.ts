@@ -9,16 +9,27 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      /* ================= FONTS ================= */
+      fontFamily: {
+        playfair: ["Playfair Display", "serif"],
+        epilogue: ["Epilogue", "sans-serif"],
+      },
+
+      /* ================= TEXT TOKENS ================= */
       colors: {
+        textPrimary: "var(--text-primary)",
+        textSecondary: "var(--text-secondary)",
+        textMuted: "var(--text-muted)",
+
+        /* ================= BRAND COLORS ================= */
         brand: {
-          50: "#ecf3ff",
-          100: "#dde9ff",
-          200: "#c2d6ff",
-          300: "#9cb9ff",
-          400: "#7592ff",
-          500: "#465fff",
-          600: "#3641f5",
-          700: "#2a31d8",
+          primary: "#016656",
+          "primary-dark": "#014D42",
+          gold: "#C1A230",
+          cream: "#F7F5F2",
+          beige: "#FBF0D2",
+          teal: "#81B1AA",
+          black: "#000000",
         },
       },
     },

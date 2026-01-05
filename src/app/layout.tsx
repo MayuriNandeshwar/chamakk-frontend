@@ -1,13 +1,13 @@
-import type { Metadata } from "next";
-import "./globals.css";
+import './globals.css';
+import type { Metadata } from 'next';
 
-import { ThemeProvider } from "@/context/ThemeContext";
-import { SidebarProvider } from "@/context/SidebarContext";
-import { AuthProvider } from "@/context/AuthContext";
+import Navbar from '@/components/customer/layout/Navbar';
+import Footer from '@/components/customer/layout/Footer';
 
 export const metadata: Metadata = {
-  title: "Chamakk Admin",
-  description: "Chamakk candle ecommerce admin panel",
+  title: 'CHAMAKK - Premium Candles',
+  description:
+    'Experience luxury with CHAMAKK premium hand-poured candles. Made with natural soy wax and finest essential oils for 40+ hour burn time.',
 };
 
 export default function RootLayout({
@@ -16,13 +16,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark">
-      <body className="min-h-screen bg-gray-50 text-gray-900 antialiased">
-        <AuthProvider>
-          <ThemeProvider>
-            <SidebarProvider>{children}</SidebarProvider>
-          </ThemeProvider>
-        </AuthProvider>
+    <html lang="en" className="scroll-smooth">
+      <body className="font-epilogue antialiased bg-[#F7F5F2]">
+        {/* GLOBAL NAVBAR */}
+        <Navbar />
+
+        {/* PAGE CONTENT */}
+        <main>{children}</main>
+
+        {/* GLOBAL FOOTER */}
+        <Footer />
       </body>
     </html>
   );

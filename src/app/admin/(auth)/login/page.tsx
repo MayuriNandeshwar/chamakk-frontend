@@ -3,88 +3,53 @@
 import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useAuth } from "@/context/AuthContext";
-import { useEffect } from "react";
-import Cookies from "js-cookie";
 
-// Simple device ID generator (replace with a better implementation if needed)
-function getDeviceId(): string {
-  let id = localStorage.getItem("deviceId");
-  if (!id) {
-    id = Math.random().toString(36).substr(2, 16);
-    localStorage.setItem("deviceId", id);
-  }
-  return id;
-}
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
+import api from "@/lib/api/axios";
 
 export default function AdminLoginPage() {
   const router = useRouter();
-  const { login } = useAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // Simple device ID generator (replace with your actual implementation if needed)
- const [deviceId, setDeviceId] = useState<string | null>(null);
-
-useEffect(() => {
-  const id = getDeviceId();
-  setDeviceId(id);
-}, []);
-
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setError(null);
-  setLoading(true);
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    setLoading(true);
 
-  try {
-    const res = await fetch("http://localhost:8080/api/auth/admin/login", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  credentials: "include", // REQUIRED
-  body: JSON.stringify({
-    identifier: email,
-    password
-  }),
-});
+    try {
+      await api.post("/api/auth/admin/login", {
+        identifier: email,
+        password,
+      });
 
-if (!res.ok) {
-  throw new Error("Invalid email or password");
-}
-
-// No token reading
-const data = await res.json();
-
-login({
-  id: data.userId,
-  name: data.name,
-  email: data.email,
-  role: data.role,
-});
-
-router.push("/admin/dashboard");
-
-
-
-  } catch (err) {
-    setError(err instanceof Error ? err.message : "Login failed");
-  } finally {
-    setLoading(false);
-  }
-};
-
+      // ✅ Cookie is set by backend
+      router.push("/admin/dashboard");
+    } catch (err: any) {
+      setError(
+        err?.response?.data?.message ||
+        "Invalid email or password"
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#f6f7f5] px-4">
+    <div className="min-h-screen flex items-center justify-center 
+                    bg-gradient-to-br from-[#FBF1D6] via-[#F7E9C3] to-[#F3E0B5] 
+                    px-4">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-8">
-        
+
         {/* Logo */}
         <div className="flex justify-center mb-6">
           <Image
             src="/logo/chamakk-logo.png"
-            alt="Chamakk"
+            alt="CHAMAKK"
             width={180}
             height={60}
             priority
@@ -95,7 +60,7 @@ router.push("/admin/dashboard");
           Admin Sign In
         </h1>
         <p className="text-sm text-center text-gray-500 mt-1 mb-6">
-          Secure access to Chamakk admin panel
+          Secure access to CHAMAKK admin panel
         </p>
 
         {error && (
@@ -105,6 +70,7 @@ router.push("/admin/dashboard");
         )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Email */}
           <div>
             <label className="block text-sm font-medium text-gray-700">
               Email
@@ -114,21 +80,43 @@ router.push("/admin/dashboard");
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-[#0E6B5C] focus:ring-1 focus:ring-[#0E6B5C] outline-none"
+              className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2
+                         focus:border-[#0E6B5C] focus:ring-1 focus:ring-[#0E6B5C]
+                         outline-none"
             />
           </div>
 
+          {/* Password with Eye Icon */}
           <div>
             <label className="block text-sm font-medium text-gray-700">
               Password
             </label>
-            <input
-              type="password"
-              required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-[#0E6B5C] focus:ring-1 focus:ring-[#0E6B5C] outline-none"
-            />
+
+            <div className="relative mt-1">
+              <input
+                type={showPassword ? "text" : "password"}
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter your password"
+                className="w-full rounded-lg border border-gray-300 px-3 py-2 pr-10
+                           focus:border-[#0E6B5C] focus:ring-1 focus:ring-[#0E6B5C]
+                           outline-none"
+              />
+
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute inset-y-0 right-3 flex items-center 
+                           text-gray-500 hover:text-gray-700"
+              >
+                {showPassword ? (
+                  <EyeSlashIcon className="h-5 w-5" />
+                ) : (
+                  <EyeIcon className="h-5 w-5" />
+                )}
+              </button>
+            </div>
           </div>
 
           <div className="text-right">
@@ -143,17 +131,18 @@ router.push("/admin/dashboard");
           <button
             type="submit"
             disabled={loading}
-            className="w-full rounded-lg bg-[#0E6B5C] py-2.5 text-white font-medium hover:bg-[#0A4F45] transition disabled:opacity-60"
+            className="w-full rounded-lg bg-[#0E6B5C] py-2.5 text-white 
+                       font-medium hover:bg-[#0A4F45] transition 
+                       disabled:opacity-60"
           >
             {loading ? "Signing in..." : "Sign In"}
           </button>
         </form>
 
         <p className="mt-6 text-center text-xs text-gray-400">
-          © {new Date().getFullYear()} Chamakk · Admin Panel
+          © {new Date().getFullYear()} CHAMAKK · Admin Panel
         </p>
       </div>
     </div>
   );
 }
-

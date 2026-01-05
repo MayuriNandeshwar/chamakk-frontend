@@ -15,7 +15,7 @@ export default function AdminSidebar() {
       className={`bg-gray-900 text-white h-screen w-64 p-4
       ${isOpen ? "block" : "hidden"} md:block`}
     >
-      <h2 className="text-xl font-semibold mb-6">Chamakk Admin</h2>
+      <h2 className="text-xl font-semibold mb-6">CHAMAKK Admin</h2>
 
       <nav className="space-y-3">
         <Link href="/admin/dashboard">Dashboard</Link>
