@@ -24,12 +24,13 @@ export default function MobileMenu({
 
       <nav className="p-6 space-y-6 font-epilogue text-sm">
         {[
-          "Holiday Specials",
-          "Shop",
-          "Corporate Gifting",
-          "Bulk Orders",
-          "About Us",
-          "Contact",
+          "New",
+              "Shop",
+              "Corporate Gifting",
+              "Bulk Orders",
+              "Our Story",
+              "About Us",
+              "Contact",
         ].map((item) => (
           <Link
             key={item}

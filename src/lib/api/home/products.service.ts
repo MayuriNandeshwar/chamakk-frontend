@@ -1,4 +1,4 @@
-import api from '@/lib/api/axios'; // Use your existing axios instance
+import api from '@/lib/axios'; // Use your existing axios instance
 
 /**
  * Bestseller product type (matches backend DTO v1.0)

@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:8080",
-  withCredentials: true, // 🔑 SEND HTTP-ONLY COOKIE
+  baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080",
+  withCredentials: true, // 🔑 REQUIRED for JWT cookies
   headers: {
     "Content-Type": "application/json",
   },

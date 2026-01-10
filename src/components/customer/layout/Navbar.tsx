@@ -57,10 +57,11 @@ export default function Navbar() {
           {/* DESKTOP MENU */}
           <div className="hidden lg:flex items-center gap-8 font-epilogue text-sm">
             {[
-              "Holiday Specials",
+              "New",
               "Shop",
               "Corporate Gifting",
               "Bulk Orders",
+              "Our Story",
               "About Us",
               "Contact",
             ].map((item) => (
