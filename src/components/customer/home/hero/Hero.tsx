@@ -6,6 +6,18 @@ import HeroSlider from "./HeroSlider";
 import Link from 'next/link';
 import { useHeroMedia } from "./useHeroMedia";
 import { preloadImages } from "./preloadImages";
+import dynamic from "next/dynamic";
+
+// Lazy load 3D components (better performance)
+const ParticleBackground = dynamic(
+  () => import("./ParticleBackground"),
+  { ssr: false }
+);
+
+const FlameGlow = dynamic(
+  () => import("./FlameGlow"),
+  { ssr: false }
+);
 
 export default function Hero() {
   const { media, loading } = useHeroMedia();
@@ -17,7 +29,7 @@ export default function Hero() {
   const touchStartX = useRef<number | null>(null);
 
   /* =============================
-     IMAGE PRELOADING (KEY STEP)
+     IMAGE PRELOADING
      ============================= */
   useEffect(() => {
     if (!media.length) return;
@@ -40,12 +52,11 @@ export default function Hero() {
     return () => clearInterval(interval);
   }, [media, paused]);
 
- if (loading || media.length === 0) {
+  if (loading || media.length === 0) {
     return (
       <section className="relative h-[75vh] md:h-screen w-full bg-black" />
     );
   }
-
 
   const active = media[activeIndex];
 
@@ -91,18 +102,41 @@ export default function Hero() {
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
     >
-      {/* BACKGROUND */}
+      {/* =============================
+          ✨ LAYER 1: FLAME GLOW
+          Warm ambient candlelight effect
+          ============================= */}
+      <div className="absolute inset-0 pointer-events-none opacity-25 mix-blend-screen">
+        <FlameGlow />
+      </div>
+
+      {/* =============================
+          ✨ LAYER 2: GOLDEN PARTICLES
+          Floating particles in brand colors
+          ============================= */}
+      <div className="absolute inset-0 pointer-events-none opacity-35">
+        <ParticleBackground />
+      </div>
+
+      {/* =============================
+          LAYER 3: PRODUCT IMAGES
+          Your existing slider
+          ============================= */}
       <HeroSlider
         media={media}
         activeIndex={activeIndex}
         direction={direction}
       />
 
-      {/* OVERLAY */}
+      {/* =============================
+          LAYER 4: OVERLAY GRADIENT
+          ============================= */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/45 to-black/10" />
 
-
-      {/* CONTENT */}
+      {/* =============================
+          LAYER 5: CONTENT
+          Text and CTAs
+          ============================= */}
       <div className="relative z-10 h-full max-w-7xl mx-auto px-6 flex items-center">
         <motion.div
           key={active.websiteMediaId}
@@ -111,36 +145,37 @@ export default function Hero() {
           transition={{ duration: 0.6 }}
           className="max-w-xl"
         >
-          <h1 className=" text-white text-4xl leading-[1.25] tracking-[0.01em] md:text-6xl 
+          <h1 className="text-white text-4xl leading-[1.25] tracking-[0.01em] md:text-6xl 
                           md:leading-[1.15] md:tracking-normal font-bold mb-6">
             {active.title}
           </h1>
-         <p className="text-white/85 text-base md:text-xl mb-10 leading-relaxed">
+          <p className="text-white/85 text-base md:text-xl mb-10 leading-relaxed">
             {active.subtitle}
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 mt-10">
-              <Link href="/products?featured=true">
-                <button className="px-12 py-4 rounded-full bg-amber-600 text-white font-semibold 
-                                  hover:bg-amber-700 hover:scale-105 shadow-xl hover:shadow-2xl 
-                                  transition-all duration-300">
-                  Shop Collections
-                </button>
-              </Link>
+            <Link href="/products?featured=true">
+              <button className="px-12 py-4 rounded-full bg-amber-600 text-white font-semibold 
+                                hover:bg-amber-700 hover:scale-105 shadow-xl hover:shadow-2xl 
+                                transition-all duration-300">
+                Shop Collections
+              </button>
+            </Link>
 
-              <Link href="/products#scents">
-                <button className="px-12 py-4 rounded-full border-2 border-white text-white font-semibold 
-                                  hover:bg-white hover:text-gray-900 hover:scale-105 
-                                  backdrop-blur-sm bg-white/10 transition-all duration-300">
-                  Explore Scents
-                </button>
-              </Link>
-            </div>
-
+            <Link href="/products#scents">
+              <button className="px-12 py-4 rounded-full border-2 border-white text-white font-semibold 
+                                hover:bg-white hover:text-gray-900 hover:scale-105 
+                                backdrop-blur-sm bg-white/10 transition-all duration-300">
+                Explore Scents
+              </button>
+            </Link>
+          </div>
         </motion.div>
       </div>
 
-      {/* LUXURY DOTS */}
+      {/* =============================
+          NAVIGATION DOTS
+          ============================= */}
       <div
         className="absolute bottom-10 left-1/2 z-20 flex -translate-x-1/2 gap-3"
         onMouseEnter={() => setPaused(true)}
@@ -155,6 +190,7 @@ export default function Hero() {
                 ? "w-10 bg-white shadow-[0_0_12px_rgba(255,255,255,0.6)]"
                 : "w-2 bg-white/40 hover:bg-white/70"
             }`}
+            aria-label={`Go to slide ${index + 1}`}
           />
         ))}
       </div>

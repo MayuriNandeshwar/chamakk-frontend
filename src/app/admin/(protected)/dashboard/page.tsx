@@ -1,36 +1,50 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import RevenueLineChart from "@/components/admin/charts/RevenueLineChart";
+import OrderStatusDonut from "@/components/admin/charts/OrderStatusDonut";
+import {
+  fetchRevenueAnalytics,
+  fetchOrderStatusDistribution,
+} from "@/lib/api/admin.dashboard";
+
 export default function AdminDashboardPage() {
-  return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-semibold text-gray-900">
-          Dashboard Overview
-        </h1>
-        <p className="text-sm text-gray-500 mt-1">
-          Monitor Chamakk sales, inventory, and customer activity
-        </p>
+  const [revenueData, setRevenueData] = useState([]);
+  const [statusData, setStatusData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadAnalytics() {
+      try {
+        const [revenue, status] = await Promise.all([
+          fetchRevenueAnalytics(30),
+          fetchOrderStatusDistribution(),
+        ]);
+
+        setRevenueData(revenue);
+        setStatusData(status);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadAnalytics();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="p-8 text-sm text-gray-500">
+        Loading analytics…
       </div>
+    );
+  }
 
-      {/* Placeholder for KPI cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-        <div className="bg-white rounded-xl p-6 shadow-sm border">
-          <p className="text-sm text-gray-500">Total Orders</p>
-          <p className="text-2xl font-semibold mt-2">—</p>
-        </div>
+  return (
+    <div className="space-y-8 p-8">
+      <RevenueLineChart data={revenueData} />
 
-        <div className="bg-white rounded-xl p-6 shadow-sm border">
-          <p className="text-sm text-gray-500">Revenue</p>
-          <p className="text-2xl font-semibold mt-2">—</p>
-        </div>
-
-        <div className="bg-white rounded-xl p-6 shadow-sm border">
-          <p className="text-sm text-gray-500">Customers</p>
-          <p className="text-2xl font-semibold mt-2">—</p>
-        </div>
-
-        <div className="bg-white rounded-xl p-6 shadow-sm border">
-          <p className="text-sm text-gray-500">Low Stock Items</p>
-          <p className="text-2xl font-semibold mt-2">—</p>
-        </div>
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+        <OrderStatusDonut data={statusData} />
       </div>
     </div>
   );
