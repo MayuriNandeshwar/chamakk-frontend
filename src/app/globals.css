@@ -6,13 +6,25 @@
 
 @layer base {
   :root {
-    --background: hsl(0 0% 100%);
+    /* ===============================
+       BRAND BACKGROUND SYSTEM
+       =============================== */
+
+    /* Customer-facing background (luxury parchment) */
+    --bg-customer: #FBF1D6;
+
+    /* Default background (admin / neutral) */
+    --background: var(--bg-customer);
+
     --foreground: hsl(222.2 84% 4.9%);
 
-    /* TEXT SYSTEM (BLACK @ ALPHA) */
-      --text-black: rgba(0, 0, 0, 0.9);
-      --text-secondary: rgba(0, 0, 0, 0.8);
-      --text-muted: rgba(0, 0, 0, 0.6);
+    /* ===============================
+       TEXT SYSTEM
+       =============================== */
+
+    --text-black: rgba(0, 0, 0, 0.9);
+    --text-secondary: rgba(0, 0, 0, 0.8);
+    --text-muted: rgba(0, 0, 0, 0.6);
 
     --border: hsl(240 5.9% 90%);
     --input: hsl(240 5.9% 90%);
@@ -22,17 +34,24 @@
   body {
     @apply bg-[var(--background)] text-[var(--foreground)] font-epilogue;
   }
-    /* Heading defaults */
-        /* Fonts only — NO color here */
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-          @apply font-playfair;
-        }
+
+  /* ===============================
+     HEADING SYSTEM
+     =============================== */
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-playfair;
+  }
 }
+
+/* ===============================
+   ANIMATIONS
+   =============================== */
 
 @keyframes chamakk-conveyor {
   from {
@@ -49,10 +68,25 @@
   width: max-content;
   animation: chamakk-conveyor 60s linear infinite;
 
-  /* Rendering quality */
   will-change: transform;
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+/* ===============================
+   LEGAL CONTENT STYLING
+   =============================== */
+
+.legal-content h2 {
+  margin-top: 2.5rem;
+  font-size: 1.5rem;
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+}
+
+.legal-content ul {
+  padding-left: 1.25rem;
+  list-style: disc;
 }
