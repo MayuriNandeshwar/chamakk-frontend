@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description:
     "Read Chamakk’s Refund, Return, Shipping, and Cancellation Policy. Learn about damaged product returns, shipping timelines, COD rules, and refund processing.",
   alternates: {
-    canonical: "https://www.chamakk.co.in/pages/refund-policy",
+    canonical: "https://www.chamakk.co.in/refund-policy",
   },
   robots: {
     index: true,
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     title: "Refund & Cancellation Policy | CHAMAKK",
     description:
       "CHAMAKK refund, shipping, COD, and cancellation policy explained clearly for customers.",
-    url: "https://www.chamakk.co.in/pages/refund-policy",
+    url: "https://www.chamakk.co.in/refund-policy",
     siteName: "CHAAMAKK",
     type: "website",
   },

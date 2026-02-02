@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description:
     "CHAMAKK Privacy Policy explains how we collect, use, and protect customer information in compliance with Indian laws, Razorpay, Meta Ads, and Google Ads requirements.",
   alternates: {
-    canonical: "https://www.chamakk.co.in/pages/privacy-policy",
+    canonical: "https://www.chamakk.co.in/privacy-policy",
   },
   robots: {
     index: true,
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     title: "Privacy Policy | CHAMAKK",
     description:
       "Learn how CHAMAKK protects your personal information and ensures secure transactions.",
-    url: "https://www.chamakk.co.in/pages/privacy-policy",
+    url: "https://www.chamakk.co.in/privacy-policy",
     siteName: "CHAMAKK",
     type: "website",
   },

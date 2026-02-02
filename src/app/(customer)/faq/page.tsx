@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description:
     "Find answers to common questions about CHAMAKK candles, shipping, payments, refunds, and care instructions.",
   alternates: {
-    canonical: "https://www.chamakk.co.in/pages/faq",
+    canonical: "https://www.chamakk.co.in/faq",
   },
   robots: {
     index: true,

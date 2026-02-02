@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description:
     "Discover the story behind CHAMAKK — a brand built on the belief that luxury should feel natural, calming, and affordable for everyone.",
   alternates: {
-    canonical: "https://www.chamakk.co.in/pages/about-us",
+    canonical: "https://www.chamakk.co.in/about-us",
   },
   robots: {
     index: true,
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     title: "About Us | CHAMAKK",
     description:
       "CHAMAKK was founded with a simple belief: luxury should be natural, calming, and accessible to all.",
-    url: "https://www.chamakk.co.in/pages/about-us",
+    url: "https://www.chamakk.co.in/about-us",
     siteName: "CHAMAKK",
     type: "website",
   },

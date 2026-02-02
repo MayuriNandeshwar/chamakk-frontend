@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description:
     "Read CHAMAKK’s Terms & Conditions governing the use of our website, products, payments, refunds, and services in compliance with Indian laws.",
   alternates: {
-    canonical: "https://www.chamakk.co.in/pages/terms-and-conditions",
+    canonical: "https://www.chamakk.co.in/terms-and-conditions",
   },
   robots: {
     index: true,
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     title: "Terms & Conditions | CHAMAKK",
     description:
       "CHAMAKK Terms & Conditions outline user responsibilities, payments, refunds, and legal policies.",
-    url: "https://www.chamakk.co.in/pages/terms-and-conditions",
+    url: "https://www.chamakk.co.in/terms-and-conditions",
     siteName: "CHAMAKK",
     type: "website",
   },
@@ -75,7 +75,7 @@ export default function TermsAndConditionsPage() {
       <p>
         Refunds, replacements, and cancellations are governed by our{" "}
         <a
-          href="/pages/refund-policy"
+          href="/refund-policy"
           className="text-black underline hover:opacity-80"
         >
           Refund Policy
@@ -100,7 +100,7 @@ export default function TermsAndConditionsPage() {
       <p>
         Your submission of personal information is governed by our{" "}
         <a
-          href="/pages/privacy-policy"
+          href="/privacy-policy"
           className="text-black underline hover:opacity-80"
         >
           Privacy Policy

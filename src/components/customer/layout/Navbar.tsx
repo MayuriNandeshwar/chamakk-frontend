@@ -78,8 +78,8 @@ export default function Navbar() {
               { label: "Corporate Gifting", href: "#" },
               { label: "Bulk Orders", href: "#" },
               { label: "Our Story", href: "#" },
-              { label: "About Us", href: "/pages/about-us" },
-              { label: "Contact", href: "/pages/contact-us" },
+              { label: "About Us", href: "/about-us" },
+              { label: "Contact", href: "/contact-us" },
             ].map(({ label, href }) => (
               <Link
                 key={label}

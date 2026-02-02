@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description:
     "CHAMAKK Shipping Policy explains delivery timelines, shipping charges, and order processing details.",
   alternates: {
-    canonical: "https://www.chamakk.co.in/pages/shipping-policy",
+    canonical: "https://www.chamakk.co.in/shipping-policy",
   },
   robots: { index: true, follow: true },
 };

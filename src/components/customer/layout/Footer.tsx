@@ -26,9 +26,9 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2 font-epilogue text-sm">
               <li><Link href="/" className="text-white/80 hover:text-white">Home</Link></li>
-              <li><Link href="/pages/about-us" className="text-white/80 hover:text-white">About Us</Link></li>
-              <li><Link href="/pages/faq" className="text-white/80 hover:text-white">FAQs</Link></li>
-              <li><Link href="/pages/contact-us" className="text-white/80 hover:text-white">Contact Us</Link></li>
+              <li><Link href="/about-us" className="text-white/80 hover:text-white">About Us</Link></li>
+              <li><Link href="/faq" className="text-white/80 hover:text-white">FAQs</Link></li>
+              <li><Link href="/contact-us" className="text-white/80 hover:text-white">Contact Us</Link></li>
             </ul>
           </div>
 
@@ -38,10 +38,10 @@ export default function Footer() {
               Legal
             </h4>
             <ul className="space-y-2 font-epilogue text-sm">
-              <li><Link href="/pages/privacy-policy" className="text-white/80 hover:text-white">Privacy Policy</Link></li>
-              <li><Link href="/pages/terms-and-conditions" className="text-white/80 hover:text-white">Terms & Conditions</Link></li>
-              <li><Link href="/pages/refund-policy" className="text-white/80 hover:text-white">Refund Policy</Link></li>
-              <li><Link href="/pages/shipping-policy" className="text-white/80 hover:text-white">Shipping Policy</Link></li>
+              <li><Link href="/privacy-policy" className="text-white/80 hover:text-white">Privacy Policy</Link></li>
+              <li><Link href="/terms-and-conditions" className="text-white/80 hover:text-white">Terms & Conditions</Link></li>
+              <li><Link href="/refund-policy" className="text-white/80 hover:text-white">Refund Policy</Link></li>
+              <li><Link href="/shipping-policy" className="text-white/80 hover:text-white">Shipping Policy</Link></li>
             </ul>
           </div>
         </div>

@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description:
     "Contact CHAMAKK for order support, product queries, or general assistance. Reach us via email, phone, or address.",
   alternates: {
-    canonical: "https://www.chamakk.co.in/pages/contact-us",
+    canonical: "https://www.chamakk.co.in/contact-us",
   },
   robots: {
     index: true,
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     title: "Contact Us | CHAMAKK",
     description:
       "Get in touch with CHAMAKK for support, inquiries, or assistance.",
-    url: "https://www.chamakk.co.in/pages/contact-us",
+    url: "https://www.chamakk.co.in/contact-us",
     siteName: "CHAMAKK",
     type: "website",
   },

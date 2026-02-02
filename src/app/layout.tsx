@@ -1,8 +1,5 @@
 // src/app/layout.tsx
 import "./globals.css";
-import UtilityBar from "@/components/customer/layout/UtilityBar";
-import Navbar from "@/components/customer/layout/Navbar";
-import Footer from "@/components/customer/layout/Footer";
 import ClientAnalyticsShell from "@/components/ClientAnalyticsShell";
 import type { Metadata } from "next";
 
@@ -24,10 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="bg-[#F7F5F2]">
         <ClientAnalyticsShell />
-        <UtilityBar />
-        <Navbar />
         {children}
-        <Footer />
       </body>
     </html>
   );
