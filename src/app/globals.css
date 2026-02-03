@@ -90,3 +90,83 @@
   padding-left: 1.25rem;
   list-style: disc;
 }
+
+/* ===============================
+   CHAMAKK COMING SOON PAGE
+   (Isolated & Safe)
+   =============================== */
+
+.coming-soon-page {
+  min-height: 100vh;
+  background: radial-gradient(circle at top,
+      #0f3d2e 0%,
+      #071a14 40%,
+      #000000 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #f5f5f5;
+}
+
+.coming-soon-logo {
+  width: 120px;
+  margin: 0 auto 1.5rem;
+  animation: chamakk-glow 3s ease-in-out infinite alternate;
+}
+
+.coming-soon-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  letter-spacing: 0.4rem;
+}
+
+.coming-soon-tagline {
+  font-family: 'Epilogue', sans-serif;
+  opacity: 0.85;
+  margin-top: 0.5rem;
+}
+
+.coming-soon-divider {
+  width: 80px;
+  height: 2px;
+  background: #c6a15b;
+  margin: 2rem auto;
+}
+
+.coming-soon-text {
+  font-size: 1.4rem;
+  margin-bottom: 0.25rem;
+}
+
+.coming-soon-sub {
+  font-size: 0.95rem;
+  opacity: 0.7;
+}
+
+.coming-soon-fade {
+  animation: chamakk-fade-up 1.6s ease forwards;
+}
+
+/* Animations */
+@keyframes chamakk-glow {
+  from {
+    filter: drop-shadow(0 0 6px #c6a15b);
+  }
+
+  to {
+    filter: drop-shadow(0 0 22px #c6a15b);
+  }
+}
+
+@keyframes chamakk-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
