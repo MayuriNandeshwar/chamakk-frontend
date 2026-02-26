@@ -4,7 +4,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   reactStrictMode: true,
 
-  // 🚨 TEMP only for launch (remove after stabilization)
+  // TEMP: remove after stabilizing build
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -18,17 +18,6 @@ const nextConfig: NextConfig = {
         pathname: "/**",
       },
     ],
-  },
-
-  async rewrites() {
-    return [
-      {
-        source: "/api/:path*",
-        destination:
-          (process.env.NEXT_PUBLIC_API_BASE_URL ??
-            "http://localhost:8080") + "/api/:path*",
-      },
-    ];
   },
 };
 
