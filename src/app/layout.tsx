@@ -5,11 +5,15 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: {
-    default: "SUNHOM – Premium Candles",
+    default: "SUNHOM",
     template: "%s | SUNHOM",
   },
   description:
     "Premium handcrafted soy wax candles that bring calm, warmth, and luxury into everyday life.",
+
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
