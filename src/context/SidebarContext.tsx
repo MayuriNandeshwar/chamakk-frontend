@@ -1,30 +1,30 @@
 "use client";
 import React, { createContext, useContext, useState, useEffect } from "react";
 
-type SidebarContextType = {
+type SideBarContextType = {
   isExpanded: boolean;
   isMobileOpen: boolean;
   isHovered: boolean;
   activeItem: string | null;
   openSubmenu: string | null;
-  toggleSidebar: () => void;
-  toggleMobileSidebar: () => void;
+  toggleSideBar: () => void;
+  toggleMobileSideBar: () => void;
   setIsHovered: (isHovered: boolean) => void;
   setActiveItem: (item: string | null) => void;
   toggleSubmenu: (item: string) => void;
 };
 
-const SidebarContext = createContext<SidebarContextType | undefined>(undefined);
+const SideBarContext = createContext<SideBarContextType | undefined>(undefined);
 
-export const useSidebar = () => {
-  const context = useContext(SidebarContext);
+export const useSideBar = () => {
+  const context = useContext(SideBarContext);
   if (!context) {
-    throw new Error("useSidebar must be used within a SidebarProvider");
+    throw new Error("useSideBar must be used within a SideBarProvider");
   }
   return context;
 };
 
-export const SidebarProvider: React.FC<{ children: React.ReactNode }> = ({
+export const SideBarProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [isExpanded, setIsExpanded] = useState(true);
@@ -51,11 +51,11 @@ export const SidebarProvider: React.FC<{ children: React.ReactNode }> = ({
     };
   }, []);
 
-  const toggleSidebar = () => {
+  const toggleSideBar = () => {
     setIsExpanded((prev) => !prev);
   };
 
-  const toggleMobileSidebar = () => {
+  const toggleMobileSideBar = () => {
     setIsMobileOpen((prev) => !prev);
   };
 
@@ -64,21 +64,21 @@ export const SidebarProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   return (
-    <SidebarContext.Provider
+    <SideBarContext.Provider
       value={{
         isExpanded: isMobile ? false : isExpanded,
         isMobileOpen,
         isHovered,
         activeItem,
         openSubmenu,
-        toggleSidebar,
-        toggleMobileSidebar,
+        toggleSideBar,
+        toggleMobileSideBar,
         setIsHovered,
         setActiveItem,
         toggleSubmenu,
       }}
     >
       {children}
-    </SidebarContext.Provider>
+    </SideBarContext.Provider>
   );
 };

@@ -1,20 +1,19 @@
 "use client";
 
 import { motion, AnimatePresence, Variants } from "framer-motion";
-import { HeroMedia } from "@/lib/api/home/hero/types";
 
-interface Props {
-  media: HeroMedia[];
-  activeIndex: number;
-  direction: number; // 1 = right, -1 = left
+interface Slide {
+  id: number;
+  desktopImage: string;
+  mobileImage: string;
 }
 
-const CLOUDINARY_BASE =
-  "https://res.cloudinary.com/dtz1gpnge/image/upload";
+interface Props {
+  slides: Slide[];
+  activeIndex: number;
+  direction: number;
+}
 
-/**
- * Direction-aware slide animation
- */
 const slideVariants: Variants = {
   enter: (dir: number) => ({
     x: dir > 0 ? "100%" : "-100%",
@@ -28,36 +27,43 @@ const slideVariants: Variants = {
 };
 
 export default function HeroSlider({
-  media,
+  slides,
   activeIndex,
   direction,
 }: Props) {
-  if (!media.length) return null;
+  if (!slides.length) return null;
 
-  const slide = media[activeIndex];
-
-  const imageUrl = `${CLOUDINARY_BASE}/q_auto,f_auto,w_1920${slide.websiteMediaUrl.replace(
-    CLOUDINARY_BASE,
-    ""
-  )}`;
+  const active = slides[activeIndex];
 
   return (
     <div className="absolute inset-0 overflow-hidden">
       <AnimatePresence initial={false} custom={direction}>
         <motion.div
-          key={slide.websiteMediaId}
+          key={active.id}
           custom={direction}
           variants={slideVariants}
           initial="enter"
           animate="center"
           exit="exit"
-          className="absolute inset-0 bg-cover bg-[position:70%_center] md:bg-center"
-          style={{ backgroundImage: `url(${imageUrl})` }}
-          transition={{
-            duration: 0.9,
-            ease: "easeInOut",
-          }}
-        />
+          transition={{ duration: 0.8, ease: "easeInOut" }}
+          className="absolute inset-0"
+        >
+          {/* Desktop */}
+          <div className="hidden md:block absolute inset-0">
+            <div
+              className="w-full h-full bg-cover bg-center"
+              style={{ backgroundImage: `url(${active.desktopImage})` }}
+            />
+          </div>
+
+          {/* Mobile */}
+          <div className="block md:hidden absolute inset-0">
+            <div
+              className="w-full h-full bg-cover bg-center"
+              style={{ backgroundImage: `url(${active.mobileImage})` }}
+            />
+          </div>
+        </motion.div>
       </AnimatePresence>
     </div>
   );

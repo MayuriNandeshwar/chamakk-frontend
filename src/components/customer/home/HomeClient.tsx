@@ -7,9 +7,13 @@ const Hero = dynamic(
   () => import("./hero/Hero"),
   { ssr: false }
 );
+const CategoryCollection = dynamic(
+  () => import("./CategoryCollection"),
+  { ssr: false }
+);
 
-const BestsellerSection = dynamic(
-  () => import("./bestSeller/BestsellerSection"),
+const FeaturedCollectionSection = dynamic(
+  () => import("./featuredCollection/FeaturedCollectionSection"),
   { ssr: false }
 );
 
@@ -52,12 +56,14 @@ export default function HomeClient() {
   return (
     <>
       <Hero />
-      <BestsellerSection />
+      <CategoryCollection />
+      
       <QualityCommitment />
+      {/* <FeaturedCollectionSection />
       <PassionSection />
       <MeaningSection />
       <NatureCommitment />
-      <CraftsmanshipSection />
+      <CraftsmanshipSection /> */}
       <Testimonials />
       <ExperienceGlow />
     </>

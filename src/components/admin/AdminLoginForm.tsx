@@ -38,7 +38,7 @@ export default function AdminLoginForm() {
       {/* Brand */}
       <div className="text-center">
         <h1 className="font-playfair text-2xl sm:text-3xl text-brand-primary">
-          CHAMAKK
+          SUNHOM
         </h1>
         <p className="mt-1 text-sm text-textMuted">
           Admin Portal
@@ -55,7 +55,7 @@ export default function AdminLoginForm() {
             type="text"
             value={identifier}
             onChange={(e) => setIdentifier(e.target.value)}
-            placeholder="admin@chamakk.in"
+            placeholder="contact@sunhom.in"
             required
             disabled={loading}
             className="mt-2 w-full rounded-lg border border-gray-200 bg-brand-cream px-4 py-3 text-sm

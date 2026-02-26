@@ -2,75 +2,77 @@
 
 import { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import HeroSlider from "./HeroSlider";
-import Link from 'next/link';
-import { useHeroMedia } from "./useHeroMedia";
-import { preloadImages } from "./preloadImages";
-import dynamic from "next/dynamic";
 
-// Lazy load 3D components (better performance)
-const ParticleBackground = dynamic(
-  () => import("./ParticleBackground"),
-  { ssr: false }
-);
+interface Slide {
+  id: number;
+  desktopImage: string;
+  mobileImage: string;
+  title: string;
+  subtitle: string;
+}
 
-const FlameGlow = dynamic(
-  () => import("./FlameGlow"),
-  { ssr: false }
-);
+const slides: Slide[] = [
+  {
+    id: 1,
+    desktopImage: "/hero/hero-1D.png",
+    mobileImage: "/hero/hero-1M.png",
+    title: "Scented Rituals for Everyday Luxury",
+    subtitle:
+      "Candles, sachets, and car fragrances crafted to elevate the spaces you live in."
+  },
+  {
+    id: 2,
+    desktopImage: "/hero/hero-2D.png",
+    mobileImage: "/hero/hero-2M.png",
+    title: "A Fragrance for Serene Evenings",
+    subtitle:
+      "Thoughtfully composed scents to accompany reflection, warmth, and togetherness this Ramadan."
+  },
+  {
+    id: 3,
+    desktopImage: "/hero/hero-3D.png",
+    mobileImage: "/hero/hero-3M.png",
+    title: "Celebrate in Color. Celebrate in Scent.",
+    subtitle:
+      "Vibrant limited-edition fragrances inspired by the joy and spirit of Holi."
+  }
+];
 
 export default function Hero() {
-  const { media, loading } = useHeroMedia();
-
   const [activeIndex, setActiveIndex] = useState(0);
   const [direction, setDirection] = useState(1);
-  const [paused, setPaused] = useState(false);
 
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const touchStartX = useRef<number | null>(null);
 
   /* =============================
-     IMAGE PRELOADING
+     AUTO SLIDE (Always Active)
      ============================= */
   useEffect(() => {
-    if (!media.length) return;
-
-    const imageUrls = media.map((item) => item.websiteMediaUrl);
-    preloadImages(imageUrls);
-  }, [media]);
-
-  /* =============================
-     AUTO SLIDE — 3 SECONDS
-     ============================= */
-  useEffect(() => {
-    if (media.length < 2 || paused) return;
-
-    const interval = setInterval(() => {
+    intervalRef.current = setInterval(() => {
       setDirection(1);
-      setActiveIndex((prev) => (prev + 1) % media.length);
+      setActiveIndex((prev) => (prev + 1) % slides.length);
     }, 3000);
 
-    return () => clearInterval(interval);
-  }, [media, paused]);
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, []);
 
-  if (loading || media.length === 0) {
-    return (
-      <section className="relative h-[75vh] md:h-screen w-full bg-black" />
-    );
-  }
+  const active = slides[activeIndex];
 
-  const active = media[activeIndex];
-
-  /* =============================
-     MANUAL CONTROLS
-     ============================= */
   const prevSlide = () => {
     setDirection(-1);
-    setActiveIndex((i) => (i - 1 + media.length) % media.length);
+    setActiveIndex((i) => (i - 1 + slides.length) % slides.length);
   };
 
   const nextSlide = () => {
     setDirection(1);
-    setActiveIndex((i) => (i + 1) % media.length);
+    setActiveIndex((i) => (i + 1) % slides.length);
   };
 
   const goToSlide = (index: number) => {
@@ -98,62 +100,43 @@ export default function Hero() {
 
   return (
     <section
-      className="relative h-[75vh] md:h-screen w-full overflow-hidden pt-[56px]"
+      className="relative w-full h-[85vh] md:h-screen overflow-hidden bg-black"
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
     >
-      {/* =============================
-          ✨ LAYER 1: FLAME GLOW
-          Warm ambient candlelight effect
-          ============================= */}
-      <div className="absolute inset-0 pointer-events-none opacity-25 mix-blend-screen">
-        <FlameGlow />
-      </div>
-
-      {/* =============================
-          ✨ LAYER 2: GOLDEN PARTICLES
-          Floating particles in brand colors
-          ============================= */}
-      <div className="absolute inset-0 pointer-events-none opacity-35">
-        <ParticleBackground />
-      </div>
-
-      {/* =============================
-          LAYER 3: PRODUCT IMAGES
-          Your existing slider
-          ============================= */}
+      {/* Background Slider */}
       <HeroSlider
-        media={media}
+        slides={slides}
         activeIndex={activeIndex}
         direction={direction}
       />
 
-      {/* =============================
-          LAYER 4: OVERLAY GRADIENT
-          ============================= */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/45 to-black/10" />
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/35" />
 
-      {/* =============================
-          LAYER 5: CONTENT
-          Text and CTAs
-          ============================= */}
-      <div className="relative z-10 h-full max-w-7xl mx-auto px-6 flex items-center">
-        <motion.div
-          key={active.websiteMediaId}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="max-w-xl"
-        >
-          <h1 className="text-white text-4xl leading-[1.25] tracking-[0.01em] md:text-6xl 
-                          md:leading-[1.15] md:tracking-normal font-bold mb-6">
+      {/* Content */}
+      <div className="relative z-10 h-full max-w-7xl mx-auto px-6 md:px-12 flex items-center">
+        <div className="max-w-2xl">
+          <motion.h1
+            key={active.title}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="font-serif text-white text-4xl md:text-6xl leading-[1.15] mb-6"
+          >
             {active.title}
-          </h1>
-          <p className="text-white/85 text-base md:text-xl mb-10 leading-relaxed">
-            {active.subtitle}
-          </p>
+          </motion.h1>
 
-          <div className="flex flex-col sm:flex-row gap-4 mt-10">
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.8 }}
+            className="text-white/85 text-base md:text-xl leading-relaxed mb-10"
+          >
+            {active.subtitle}
+          </motion.p>
+
+          <div className="flex flex-col sm:flex-row gap-4">
             <Link href="/products?featured=true">
               <button className="px-12 py-4 rounded-full bg-amber-600 text-white font-semibold 
                                 hover:bg-amber-700 hover:scale-105 shadow-xl hover:shadow-2xl 
@@ -170,18 +153,12 @@ export default function Hero() {
               </button>
             </Link>
           </div>
-        </motion.div>
+        </div>
       </div>
 
-      {/* =============================
-          NAVIGATION DOTS
-          ============================= */}
-      <div
-        className="absolute bottom-10 left-1/2 z-20 flex -translate-x-1/2 gap-3"
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
-      >
-        {media.map((_, index) => (
+      {/* Dots */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-20">
+        {slides.map((_, index) => (
           <button
             key={index}
             onClick={() => goToSlide(index)}
@@ -190,7 +167,6 @@ export default function Hero() {
                 ? "w-10 bg-white shadow-[0_0_12px_rgba(255,255,255,0.6)]"
                 : "w-2 bg-white/40 hover:bg-white/70"
             }`}
-            aria-label={`Go to slide ${index + 1}`}
           />
         ))}
       </div>

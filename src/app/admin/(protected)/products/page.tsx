@@ -1,25 +1,27 @@
-import PageHeader from "@/components/admin/shared/PageHeader";
-import ProductTable from "@/components/admin/products/ProductTable";
-import EmptyProducts from "@/components/admin/products/EmptyProducts";
-import { getAdminProducts } from "@/services/admin.products.service";
+import { headers } from "next/headers";
+import AdminProductsClient from "./AdminProductsClient";
 
-export default async function AdminProductsPage() {
-  const products = await getAdminProducts();
+export default async function Page() {
+  const headerStore = await headers();
+  const cookie = headerStore.get("cookie") ?? "";
 
-  return (
-    <section className="space-y-6 p-8">
-      <PageHeader
-        title="Products"
-        subtitle="Manage all products in your store"
-        actionLabel="Add Product"
-        actionHref="/admin/products/new"
-      />
-
-      {products.length === 0 ? (
-        <EmptyProducts />
-      ) : (
-        <ProductTable products={products} />
-      )}
-    </section>
+  const res = await fetch(
+    "http://localhost:8080/api/admin/products",
+    {
+      headers: {
+        cookie,
+      },
+      cache: "no-store",
+    }
   );
+
+  if (!res.ok) {
+    console.error("Failed to fetch products", res.status);
+    return <AdminProductsClient products={[]} />;
+  }
+
+  const text = await res.text();
+  const products = text ? JSON.parse(text) : [];
+
+  return <AdminProductsClient products={products} />;
 }

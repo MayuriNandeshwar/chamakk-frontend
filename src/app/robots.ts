@@ -13,6 +13,6 @@ export default function robots(): MetadataRoute.Robots {
         ],
       },
     ],
-    sitemap: "https://www.chamakk.co.in/sitemap.xml",
+    sitemap: "https://www.sunhom.in/sitemap.xml",
   };
 }

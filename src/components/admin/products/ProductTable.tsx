@@ -1,88 +1,94 @@
 "use client";
 
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import {
-  Table,
-  TableHeader,
-  TableBody,
-  TableRow,
-  TableCell,
-} from "@/components/ui/table";
 import Badge from "@/components/ui/badge";
+import ProductActions from "./ProductActions";
 import { AdminProductListDto } from "@/services/admin.products.service";
-
 
 type Props = {
   products: AdminProductListDto[];
 };
 
-export default function ProductTable({ products }: Props) {
-  const router = useRouter();
+export default function ProductsTable({ products }: Props) {
+  const safeProducts = Array.isArray(products) ? products : [];
 
   return (
-    <div className="rounded-lg border bg-white">
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableCell isHeader className="text-left">
-              Product
-            </TableCell>
-            <TableCell isHeader>Price</TableCell>
-            <TableCell isHeader>Status</TableCell>
-            <TableCell isHeader>Last Updated</TableCell>
-          </TableRow>
-        </TableHeader>
+    <div className="rounded-xl border bg-white overflow-visible">
+      <table className="w-full border-collapse">
+        <thead className="bg-gray-50 text-xs uppercase text-gray-700">
+          <tr>
+            <th className="px-5 py-3 w-[90px] text-left">Image</th>
+            <th className="px-5 py-3 text-left">Product</th>
+            <th className="px-5 py-3 w-[140px] text-left">Price</th>
+            <th className="px-5 py-3 w-[140px] text-left">Status</th>
+            <th className="px-5 py-3 w-[160px] text-left">Last Updated</th>
+            <th className="px-5 py-3 w-[80px] text-center">Action</th>
+          </tr>
+        </thead>
 
-        <TableBody>
-            {products.map((product) => (
-              <TableRow
-                key={product.productId}
-                className="cursor-pointer hover:bg-gray-50 transition"
-                onClick={() =>
-                  router.push(`/admin/products/${product.productId}`)
-                }
+        <tbody>
+          {safeProducts.map((p) => {
+            const price =
+              typeof p.basePrice === "number"
+                ? `₹${p.basePrice.toFixed(2)}`
+                : "—";
+
+            return (
+              <tr
+                key={p.productId}
+                className="border-t hover:bg-gray-50 transition"
               >
-                <TableCell className="flex items-center gap-4 py-4">
-                  {product.thumbnail && (
-                    <Image
-                      src={product.thumbnail}
-                      alt={product.name}
-                      width={48}
-                      height={48}
-                      className="rounded-lg object-cover border"
-                    />
-                  )}
+                {/* IMAGE */}
+                <td className="px-5 py-4">
+                  <Image
+                    src={p.thumbnail || "/placeholder.png"}
+                    alt={p.name}
+                    width={64}
+                    height={64}
+                    className="rounded-lg border object-cover"
+                  />
+                </td>
 
-                  <div>
-                    <div className="font-semibold text-gray-900">
-                      {product.name}
-                    </div>
-                  </div>
-                </TableCell>
+                {/* PRODUCT */}
+                <td className="px-5 py-4 font-medium text-gray-900">
+                  {p.name}
+                </td>
 
-                <TableCell className="font-medium">
-                  ₹{product.basePrice.toFixed(2)}
-                </TableCell>
+                {/* PRICE */}
+                <td className="px-5 py-4 font-medium">
+                  {price}
+                </td>
 
-                <TableCell>
+                {/* STATUS */}
+                <td className="px-5 py-4">
                   <Badge
                     variant="light"
-                    color={product.status === "PUBLISHED" ? "success" : "warning"}
-                    size="sm"
+                    color={
+                      p.status === "PUBLISHED"
+                        ? "success"
+                        : "warning"
+                    }
                   >
-                    {product.status}
+                    {p.status}
                   </Badge>
-                </TableCell>
+                </td>
 
-                <TableCell className="text-sm text-gray-600">
-                  {new Date(product.updatedAt).toLocaleDateString()}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
+                {/* DATE */}
+                <td className="px-5 py-4 text-sm text-gray-600">
+                  {p.updatedAt
+                    ? new Date(p.updatedAt).toLocaleDateString()
+                    : "—"}
+                </td>
 
-      </Table>
+                {/* ACTION */}
+                <td className="px-5 py-4 text-center">
+                  <ProductActions productId={p.productId} />
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   );
 }

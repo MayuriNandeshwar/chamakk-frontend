@@ -52,7 +52,7 @@ export default function QualityCommitment() {
             Our Commitment to Quality
           </h2>
           <p className="font-epilogue text-lg text-black mb-8 leading-relaxed">
-            Every CHAMAKK candle is crafted with intention—using carefully
+            Every SUNHOM fragrance products is crafted with intention—using carefully
             selected ingredients and time-honored methods to deliver a refined,
             sensory experience.
           </p>

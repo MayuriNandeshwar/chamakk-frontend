@@ -31,7 +31,7 @@ export default function PassionSection() {
         <div className="relative h-[420px] md:h-[560px] rounded-3xl overflow-hidden">
           <Image
             src="/03.png"
-            alt="Chamakk candle ritual"
+            alt="SUNHOM fragrance products ritual"
             fill
             priority
             className="object-cover"
@@ -50,7 +50,7 @@ export default function PassionSection() {
           </h2>
 
           <p className="font-epilogue text-lg leading-relaxed text-black">
-            CHAMAKK was born from a belief that fragrance is not decoration,
+            SUNHOM was born from a belief that fragrance is not decoration,
             but ritual. Each candle is carefully hand-poured to slow down time,
             soften spaces, and create moments of calm presence.
             <br />

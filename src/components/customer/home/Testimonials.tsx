@@ -10,7 +10,7 @@ const reviews = [
     product: "Lime Whisper",
     date: "19 November 2025",
     avatar: "/users/user1.jpg", // placeholder
-    text: "I recently tried the Chamakk Candle, and I’m genuinely impressed. The fragrance is beautifully balanced—not too strong, not too light. It fills the room with a warm, soothing aroma within minutes. Burns evenly and lasts longer than most candles I’ve used.",
+    text: "I recently tried the SUNHOM fragrance products, and I’m genuinely impressed. The fragrance is beautifully balanced—not too strong, not too light. It fills the room with a warm, soothing aroma within minutes. Burns evenly and lasts longer than most candles I’ve used.",
   },
   {
     id: 2,

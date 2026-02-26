@@ -5,8 +5,8 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: {
-    default: "CHAMAKK – Premium Candles",
-    template: "%s | CHAMAKK",
+    default: "SUNHOM – Premium Candles",
+    template: "%s | SUNHOM",
   },
   description:
     "Premium handcrafted soy wax candles that bring calm, warmth, and luxury into everyday life.",

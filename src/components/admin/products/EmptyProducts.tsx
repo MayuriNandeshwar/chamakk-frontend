@@ -8,7 +8,7 @@ export default function EmptyProducts() {
       <Package className="h-10 w-10 text-muted-foreground" />
       <h3 className="text-lg font-semibold">No products yet</h3>
       <p className="text-sm text-muted-foreground">
-        Start by adding your first product to Chamakk.
+        Start by adding your first product to SUNHOM.
       </p>
       <Link href="/admin/products/new">
         <Button>Add Product</Button>

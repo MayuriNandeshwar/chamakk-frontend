@@ -2,9 +2,11 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import AdminSidebar from '@/components/admin/AdminSidebar';
-import AdminTopbar from '@/components/admin/AdminTopbar';
+import AdminSideBar from '@/components/admin/AdminSideBar';
+import AdminTopBar from '@/components/admin/AdminTopBar';
 import { fetchAdminMe } from '@/lib/api/admin.auth';
+import { SideBarProvider } from '@/context/SideBarContext';
+import { ThemeProvider } from '@/context/ThemeContext';
 
 export default function AdminProtectedLayout({
   children,
@@ -38,14 +40,37 @@ export default function AdminProtectedLayout({
   }
 
   return (
-    <div className="flex h-screen bg-[#F7F7F7]">
-      <AdminSidebar role={role!} />
-      <div className="flex flex-col flex-1">
-        <AdminTopbar />
-        <main className="flex-1 p-8 overflow-y-auto">
-          {children}
-        </main>
-      </div>
-    </div>
+    <ThemeProvider>
+      <SideBarProvider>
+        <div className="flex h-screen bg-[#F7F7F7] dark:bg-gray-900 overflow-hidden">
+          
+          {/* SIDEBAR */}
+          <AdminSideBar role={role!} />
+
+          {/* RIGHT CONTENT AREA */}
+          <div className="flex flex-col flex-1 min-w-0">
+            
+            {/* TOPBAR */}
+            <AdminTopBar />
+
+            {/* PAGE CONTENT */}
+            <main className="flex-1 overflow-y-auto p-4 md:p-6">
+              <div className="max-w-[1200px] mx-auto">
+                {children}
+              </div>
+            </main>
+
+            {/* FOOTER (GLOBAL) */}
+            <footer className="border-t bg-white dark:bg-gray-900">
+              <div className="max-w-[1200px] mx-auto px-4 py-3 text-center text-sm text-gray-500 dark:text-gray-400">
+                Copyright © 2026 <span className="font-medium text-brand-primary">SUNHOM</span> Admin Dashboard.  
+                All Rights Reserved.
+              </div>
+            </footer>
+
+          </div>
+        </div>
+      </SideBarProvider>
+    </ThemeProvider>
   );
 }

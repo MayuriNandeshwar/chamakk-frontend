@@ -46,7 +46,7 @@ export default function MeaningSection() {
           <div className="flex flex-col justify-center">
             <h2 className="font-playfair text-2xl md:text-4xl font-bold text-brand-primary
                            text-center md:text-left mb-5">
-              The Meaning of CHAMAKK
+              The Meaning of SUNHOM
             </h2>
 
             {/* Accent line */}
@@ -55,24 +55,24 @@ export default function MeaningSection() {
 
             <div className="space-y-4 md:text-left">
               <p className="font-epilogue text-lg leading-relaxed text-black">
-                CHAMAKK was born from a simple belief shared by its founder,
+                SUNHOM was born from a simple belief shared by its founder,
                 <strong> Vishal Gndhi</strong> — luxury should feel natural,
                 last long, and never feel out of reach.
               </p>
 
               <p className="font-epilogue text-lg leading-relaxed text-black">
-                Each candle is thoughtfully crafted using clean ingredients,
+                Each product is thoughtfully crafted using clean ingredients,
                 refined fragrances, and slow, intentional processes —
                 designed to elevate everyday moments without excess.
               </p>
 
               <p className="font-epilogue text-lg leading-relaxed text-black">
-                From calm evenings to quiet celebrations, CHAMAKK brings warmth
+                From calm evenings to quiet celebrations, SUNHOM brings warmth
                 and presence into spaces where people pause, breathe, and feel at home.
               </p>
 
               <p className="font-epilogue text-lg leading-relaxed text-black">
-                CHAMAKK stands for quiet confidence — premium, honest,
+                SUNHOM stands for quiet confidence — premium, honest,
                 and made for everyone who believes luxury should be felt,
                 not waited for.
               </p>

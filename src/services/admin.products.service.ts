@@ -1,5 +1,8 @@
 import api from "@/lib/axios";
-import { cookies } from "next/headers";
+
+/* =======================
+   TYPES
+======================= */
 
 export type AdminProductListDto = {
   productId: string;
@@ -10,21 +13,20 @@ export type AdminProductListDto = {
   updatedAt: string;
 };
 
+/* =======================
+   CLIENT API SERVICE
+======================= */
 
-export const getAdminProducts = async (): Promise<AdminProductListDto[]> => {
-  // ✅ cookies() IS ASYNC IN NEXT 16
-  const cookieStore = await cookies();
+export const adminProductService = {
+  async getAll(): Promise<AdminProductListDto[]> {
+    const res = await api.get("/api/admin/products");
+    return res.data;
+  },
 
-  const cookieHeader = cookieStore
-    .getAll()
-    .map((c) => `${c.name}=${c.value}`)
-    .join("; ");
-
-  const res = await api.get("/api/admin/products", {
-    headers: {
-      Cookie: cookieHeader,
-    },
-  });
-
-  return res.data;
+  async createProduct(): Promise<{ productId: string }> {
+    const res = await api.post("/api/admin/products", {
+      status: "DRAFT",
+    });
+    return res.data;
+  },
 };

@@ -12,7 +12,8 @@ export default function CraftsmanshipSection() {
             The Art of Craftsmanship
           </h2>
           <p className="font-epilogue text-lg text-black mb-8 leading-relaxed">
-            Every CHAMAKK candle is the result of a slow, intentional process—
+            Every SUNHOM product — whether candle, diffuser, or camphor sachet —
+            is the result of a slow, intentional process—
             where natural materials, skilled hands, and thoughtful design come
             together to create something enduring.
           </p>
@@ -82,7 +83,7 @@ export default function CraftsmanshipSection() {
         <div className="relative h-[520px] md:h-[640px] rounded-3xl overflow-hidden">
           <Image
             src="/20.png"
-            alt="Finished CHAMAKK candle"
+            alt="Finished SUNHOM fragrance products"
             fill
             priority
             className="object-cover"

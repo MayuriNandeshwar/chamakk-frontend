@@ -31,7 +31,7 @@ export default function ExperienceGlow() {
         </h2>
 
         <p className="font-epilogue text-lg text-black mb-8 leading-relaxed">
-          It's time to discover your sanctuary. Light a CHAMAKK candle and
+          It's time to discover your sanctuary. Light a SUNHOM fragrance products and
           transform your space into a sanctuary of warmth and tranquility.
         </p>
 

@@ -2,68 +2,75 @@ import type { Metadata } from "next";
 import LegalLayout from "@/components/legal/LegalLayout";
 
 export const metadata: Metadata = {
-  title: "About Us | CHAMAKK",
+  title: "About Us | SUNHOM – Enduring Ambience",
   description:
-    "Discover the story behind CHAMAKK — a brand built on the belief that luxury should feel natural, calming, and affordable for everyone.",
+    "Discover SUNHOM — a modern home fragrance brand built on the belief that luxury should feel natural, calming, and accessible every day.",
   alternates: {
-    canonical: "https://www.chamakk.co.in/about-us",
+    canonical: "https://www.sunhom.in/about-us",
   },
   robots: {
     index: true,
     follow: true,
   },
   openGraph: {
-    title: "About Us | CHAMAKK",
+    title: "About Us | SUNHOM",
     description:
-      "CHAMAKK was founded with a simple belief: luxury should be natural, calming, and accessible to all.",
-    url: "https://www.chamakk.co.in/about-us",
-    siteName: "CHAMAKK",
+      "SUNHOM creates thoughtfully crafted candles and fragrance rituals designed to bring calm, warmth, and understated luxury into everyday living.",
+    url: "https://www.sunhom.in/about-us",
+    siteName: "SUNHOM",
     type: "website",
   },
 };
 
 export default function AboutUsPage() {
   return (
-    <LegalLayout title="About Us">
+    <LegalLayout title="About SUNHOM">
       <p>
-        <strong>CHAMAKK</strong> was born from a simple but powerful belief —
-        luxury should not feel distant, expensive, or exclusive. It should feel
-        natural, calming, and something everyone can afford and enjoy in their
-        everyday life.
+        <strong>SUNHOM</strong> was created with a simple yet powerful belief —
+        luxury should feel effortless, calming, and part of everyday life.
+        It should not feel distant, intimidating, or reserved for a select few.
       </p>
 
       <p>
-        In a world where luxury is often associated with high prices and limited
-        access, CHAMAKK was created to change that perception. Our goal is to
-        bring thoughtfully crafted candles that elevate your space, mood, and
-        rituals — without making luxury feel out of reach.
+        In a world where luxury is often defined by excess, SUNHOM chooses a
+        different path. We focus on quiet elegance — products that elevate your
+        surroundings, soothe your senses, and bring warmth into your space,
+        without demanding attention or high prices.
       </p>
 
-      <h2>Why CHAMAKK?</h2>
+      <h2>Our Purpose</h2>
       <p>
-        Our founder believed that small moments of calm and warmth should be
-        accessible to everyone. A softly glowing candle, a soothing fragrance,
-        and a peaceful environment should not be reserved for a few — they
-        should be part of everyday living.
+        Modern life moves fast. SUNHOM exists to slow things down.
+        Through gentle fragrance, soft candlelight, and thoughtfully designed
+        rituals, we help create moments of calm — moments that feel personal,
+        grounding, and restorative.
       </p>
 
       <p>
-        CHAMAKK focuses on creating products that balance quality, design, and
-        affordability. Every candle is crafted with care, using natural soy wax
-        and refined fragrances, designed to feel premium while remaining
-        pocket-friendly.
+        Whether it’s lighting a candle after a long day, refreshing your home,
+        or elevating a quiet evening, SUNHOM is designed to be part of your
+        everyday rituals.
       </p>
 
-      <h2>Our Philosophy</h2>
+      <h2>What Makes SUNHOM Different</h2>
       <ul>
-        <li>Luxury should feel natural, not intimidating</li>
-        <li>Quality should be accessible, not exclusive</li>
-        <li>Calm and warmth should be part of everyday life</li>
+        <li>Minimal, timeless design that feels premium yet approachable</li>
+        <li>Carefully selected fragrances that are soothing, not overpowering</li>
+        <li>High-quality materials crafted with attention to detail</li>
+        <li>Luxury positioned for everyday use — not occasional indulgence</li>
       </ul>
 
+      <h2>Our Philosophy</h2>
       <p>
-        CHAMAKK is not about extravagance. It is about creating moments —
-        moments of calm, reflection, and comfort — at a price that makes sense.
+        We believe that true luxury lies in how something makes you feel —
+        calm, comfortable, and at home. SUNHOM is not about extravagance.
+        It is about balance, intention, and creating spaces that feel warm
+        and inviting.
+      </p>
+
+      <p>
+        Every product we create is designed to blend seamlessly into your life,
+        enhancing your environment without overwhelming it.
       </p>
 
       <p className="text-sm text-black/60 mt-10">
