@@ -7,7 +7,7 @@ import {
   Settings,
   UserCircle,
 } from 'lucide-react';
-import { useSideBar } from '@/context/SideBarContext';
+import { useSideBar } from '@/context/SidebarContext';
 import { useState } from 'react';
 
 export default function AdminTopbar() {

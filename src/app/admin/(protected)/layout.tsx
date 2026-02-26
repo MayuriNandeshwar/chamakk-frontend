@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import AdminSideBar from '@/components/admin/AdminSideBar';
-import AdminTopBar from '@/components/admin/AdminTopBar';
+import AdminSidebar from '@/components/admin/AdminSidebar';
+import AdminTopbar from '@/components/admin/AdminTopbar';
 import { fetchAdminMe } from '@/lib/api/admin.auth';
-import { SideBarProvider } from '@/context/SideBarContext';
+import { SidebarProvider } from '@/context/SidebarContext';
 import { ThemeProvider } from '@/context/ThemeContext';
 
 export default function AdminProtectedLayout({
@@ -41,17 +41,17 @@ export default function AdminProtectedLayout({
 
   return (
     <ThemeProvider>
-      <SideBarProvider>
+      <SidebarProvider>
         <div className="flex h-screen bg-[#F7F7F7] dark:bg-gray-900 overflow-hidden">
           
           {/* SIDEBAR */}
-          <AdminSideBar role={role!} />
+          <AdminSidebar role={role!} />
 
           {/* RIGHT CONTENT AREA */}
           <div className="flex flex-col flex-1 min-w-0">
             
             {/* TOPBAR */}
-            <AdminTopBar />
+            <AdminTopbar />
 
             {/* PAGE CONTENT */}
             <main className="flex-1 overflow-y-auto p-4 md:p-6">
@@ -70,7 +70,7 @@ export default function AdminProtectedLayout({
 
           </div>
         </div>
-      </SideBarProvider>
+      </SidebarProvider>
     </ThemeProvider>
   );
 }

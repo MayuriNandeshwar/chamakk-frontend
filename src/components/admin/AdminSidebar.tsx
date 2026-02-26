@@ -12,7 +12,7 @@ import {
   Settings,
   Store,
 } from 'lucide-react';
-import { useSideBar } from '@/context/SideBarContext';
+import { useSideBar } from '@/context/SidebarContext';
 
 type Role = 'ADMIN' | 'SUPER_ADMIN';
 
@@ -27,7 +27,7 @@ const NAV_ITEMS = [
   { label: 'Settings', href: '/admin/settings', icon: Settings, roles: ['SUPER_ADMIN'] },
 ];
 
-export default function AdminSideBar({ role }: { role: Role }) {
+export default function AdminSidebar({ role }: { role: Role }) {
   const pathname = usePathname();
   const { isMobileOpen, toggleMobileSideBar } = useSideBar();
 

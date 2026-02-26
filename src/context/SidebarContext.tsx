@@ -1,7 +1,7 @@
 "use client";
 import React, { createContext, useContext, useState, useEffect } from "react";
 
-type SideBarContextType = {
+type SidebarContextType = {
   isExpanded: boolean;
   isMobileOpen: boolean;
   isHovered: boolean;
@@ -14,17 +14,17 @@ type SideBarContextType = {
   toggleSubmenu: (item: string) => void;
 };
 
-const SideBarContext = createContext<SideBarContextType | undefined>(undefined);
+const SidebarContext = createContext<SidebarContextType | undefined>(undefined);
 
 export const useSideBar = () => {
-  const context = useContext(SideBarContext);
+  const context = useContext(SidebarContext);
   if (!context) {
-    throw new Error("useSideBar must be used within a SideBarProvider");
+    throw new Error("useSideBar must be used within a SidebarProvider");
   }
   return context;
 };
 
-export const SideBarProvider: React.FC<{ children: React.ReactNode }> = ({
+export const SidebarProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [isExpanded, setIsExpanded] = useState(true);
@@ -64,7 +64,7 @@ export const SideBarProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   return (
-    <SideBarContext.Provider
+    <SidebarContext.Provider
       value={{
         isExpanded: isMobile ? false : isExpanded,
         isMobileOpen,
@@ -79,6 +79,6 @@ export const SideBarProvider: React.FC<{ children: React.ReactNode }> = ({
       }}
     >
       {children}
-    </SideBarContext.Provider>
+    </SidebarContext.Provider>
   );
 };
