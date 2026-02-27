@@ -35,19 +35,16 @@ export default function CategorySection() {
   };
 
   return (
-    <section className="py-14 bg-[var(--bg-primary)] border-t border-[var(--border-soft)]">
+    <section className="py-12 bg-[var(--bg-primary)] border-t border-[var(--border-soft)]">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* HEADER */}
-        <div className="max-w-4xl mx-auto text-center mb-16">
+        <div className="max-w-4xl mx-auto text-center mb-12">
 
-           <p className="text-s tracking-[0.35em] text-amber-700 mb-3 uppercase">
+           <h2 className="font-playfair text-3xl md:text-4xl text-amber-700 mb-6">
             Our Categories
-          </p>
-
-          <h2 className="font-playfair text-2xl md:text-4xl font-bold text-brand-primary mb-5">
-            Explore SUNHOM Collections
           </h2>
+
 
           <p className="font-epilogue text-lg text-black mb-10 leading-relaxed">
             Discover fragrance experiences crafted for home, car, and personal spaces.

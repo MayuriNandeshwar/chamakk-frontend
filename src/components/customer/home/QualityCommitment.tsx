@@ -1,86 +1,105 @@
-'use client';
+"use client";
 
-import { useEffect, useRef, useState } from 'react';
-import { Flame, Droplet, Clock } from 'lucide-react';
+import { useEffect, useState } from "react";
+import {
+  Leaf,
+  Flame,
+  Droplets,
+  Package,
+  Wind,
+  ShieldCheck,
+  Lock,
+} from "lucide-react";
 
-const FEATURES = [
-  {
-    icon: Flame,
-    title: 'Hand-Poured Soy Wax',
-    description:
-      'Made using 100% natural soy wax, hand-poured in small batches for a clean, even burn.',
-  },
-  {
-    icon: Droplet,
-    title: 'Pure Fragrance Oils',
-    description:
-      'Crafted with high-quality fragrance oils that deliver a refined, long-lasting aroma.',
-  },
-  {
-    icon: Clock,
-    title: 'Extended Burn Time',
-    description:
-      'Thoughtfully designed to offer over 35 hours of consistent, calming illumination.',
-  },
-];
+export default function QualitySection() {
+  const qualities = [
+    { icon: Leaf, label: "Clean Wax Formulation" },
+    { icon: Flame, label: "Cotton Core Wicks" },
+    { icon: Droplets, label: "Fine Fragrance Composition" },
+    { icon: ShieldCheck, label: "Free From Paraffin" },
+    { icon: Package, label: "Thoughtful Packaging" },
+    { icon: Wind, label: "Balanced Scent Projection" },
+    { icon: Lock, label: "Protected Checkout" },
+  ];
 
-export default function QualityCommitment() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
 
+  // Auto slide for mobile
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => entry.isIntersecting && setIsVisible(true),
-      { threshold: 0.25 }
-    );
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % qualities.length);
+    }, 2500);
 
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
+    return () => clearInterval(interval);
   }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      className={`relative pt-8 md:pt-8 pb-8 md:pb-14 bg-[#faf9f7] transition-opacity duration-1000 ${
-        isVisible ? 'opacity-100' : 'opacity-0'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4">
-        {/* Heading */}
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="font-playfair text-2xl md:text-4xl font-bold text-brand-primary mb-5">
-            Our Commitment to Quality
-          </h2>
-          <p className="font-epilogue text-lg text-black mb-8 leading-relaxed">
-            Every SUNHOM fragrance products is crafted with intention—using carefully
-            selected ingredients and time-honored methods to deliver a refined,
-            sensory experience.
-          </p>
-        </div>
+    <section className="py-12 md:py-12 bg-white">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
+        <div className="rounded-3xl bg-[#f8f1e9] border border-white/60 px-8 py-10 md:px-12 md:py-12">
 
-        {/* Features */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-          {FEATURES.map((feature, index) => (
-            <div
-              key={feature.title}
-              className={`text-center bg-white rounded-2xl px-8 py-10 shadow-sm hover:shadow-lg transition-all duration-500 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-              }`}
-              style={{ transitionDelay: `${index * 120}ms` }}
-            >
-              <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-amber-100">
-                <feature.icon className="h-6 w-6 text-amber-600" />
-              </div>
+          {/* HEADER */}
+          <div className="text-center mb-10 max-w-3xl mx-auto">
+            
+             <h2 className="font-playfair text-3xl md:text-4xl text-amber-700 mb-6">
+              Pure By Design
+            </h2>
 
-              <h3 className="font-playfair text-xl md:text-2xl text-brand-primary mb-4">
-                {feature.title}
-              </h3>
+            <p className="font-epilogue text-lg text-[#333] leading-relaxed">
+              Meticulously formulated fragrances created with clarity,
+              intention, and enduring performance.
+            </p>
+          </div>
 
-              <p className="font-epilogue text-black leading-relaxed">
-                {feature.description}
-              </p>
-            </div>
-          ))}
+          {/* MOBILE AUTO SLIDER */}
+          <div className="md:hidden relative h-[140px] flex items-center justify-center">
+            {qualities.map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <div
+                  key={index}
+                  className={`absolute transition-opacity duration-700 ${
+                    activeIndex === index
+                      ? "opacity-100"
+                      : "opacity-0"
+                  }`}
+                >
+                  <div className="flex flex-col items-center text-center">
+                    <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-white border border-gray-200 shadow-sm">
+                      <Icon
+                        className="h-7 w-7 text-brand-primary"
+                        strokeWidth={2.5}
+                      />
+                    </div>
+                    <p className="font-epilogue text-sm text-black leading-relaxed">
+                      {item.label}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* DESKTOP GRID */}
+          <div className="hidden md:grid md:grid-cols-7 gap-10">
+            {qualities.map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <div key={index} className="flex flex-col items-center text-center">
+                  <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-white border border-gray-200 shadow-sm">
+                    <Icon
+                      className="h-7 w-7 text-brand-primary"
+                      strokeWidth={2.5}
+                    />
+                  </div>
+                  <p className="font-epilogue text-sm text-black leading-relaxed">
+                    {item.label}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+
         </div>
       </div>
     </section>

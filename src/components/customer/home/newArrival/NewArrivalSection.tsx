@@ -5,7 +5,7 @@ import { productService, BestsellerProduct } from '@/lib/api/home/products.servi
 import ProductCard from './ProductCard';
 import Link from 'next/link';
 
-export default function FeaturedCollectionSection() {
+export default function NewArrivalSection() {
   const [products, setProducts] = useState<BestsellerProduct[]>([]);
   const scrollerRef = useRef<HTMLDivElement>(null);
 
@@ -33,19 +33,14 @@ export default function FeaturedCollectionSection() {
       <div className="max-w-7xl mx-auto px-4">
 
         {/* HEADER */}
-        <div className="max-w-4xl mx-auto px-6 text-center">
+        <div className="max-w-4xl mx-auto px-6 text-center mb-12">
           <h2 className="font-playfair text-3xl md:text-4xl text-amber-700 mb-6">
-            Our Most Loved 
+            The Latest Expressions
           </h2>
 
-          <p className="font-epilogue text-lg text-black mb-10 leading-relaxed">
-            Discover our most loved creations — from the refined calm of the 
-            <span className="font-medium"> Signature Candle Collection</span>, 
-            to the elegance of the 
-            <span className="font-medium"> Drive Collection</span>, 
-            and the purity of 
-            <span className="font-medium"> Pure Air Rituals</span>.
-            Crafted to transform every space into a sensory experience.
+          <p className="font-epilogue text-lg text-[#333] leading-relaxed">
+            An evolving collection of scent and ambience — created to enrich
+            modern spaces with effortless luxury and quiet refinement.
           </p>
         </div>
 
@@ -85,6 +80,18 @@ export default function FeaturedCollectionSection() {
               </div>
             ))}
           </div>
+        </div>
+
+        {/* CTA BUTTON (Properly Centered) */}
+        <div className="flex justify-center mt-8">
+          <Link
+            href="/products?featured=true"
+            className="px-12 py-4 rounded-full bg-amber-600 text-white font-semibold 
+                       hover:bg-amber-700 hover:scale-105 shadow-xl hover:shadow-2xl 
+                       transition-all duration-300 inline-block"
+          >
+            View New Collection →
+          </Link>
         </div>
 
       </div>

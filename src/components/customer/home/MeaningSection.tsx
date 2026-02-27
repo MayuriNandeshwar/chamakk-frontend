@@ -1,17 +1,17 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 
 export default function MeaningSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-
   const [isVisible, setIsVisible] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => entry.isIntersecting && setIsVisible(true),
+      ([entry]) => {
+        if (entry.isIntersecting) setIsVisible(true);
+      },
       { threshold: 0.2 }
     );
 
@@ -19,96 +19,67 @@ export default function MeaningSection() {
     return () => observer.disconnect();
   }, []);
 
-  const playVideo = () => {
-    if (!videoRef.current) return;
-    videoRef.current.muted = false;
-    videoRef.current.play();
-    setIsPlaying(true);
-  };
-
-  const resetVideo = () => {
-    if (!videoRef.current) return;
-    videoRef.current.currentTime = 0;
-    setIsPlaying(false);
-  };
-
   return (
     <section
       ref={sectionRef}
-      className={`bg-white transition-opacity duration-700 ${
-        isVisible ? "opacity-100" : "opacity-0"
-      }`}
+      className="bg-white py-12 md:py-12"
     >
-      <div className="max-w-7xl mx-auto px-6 py-12 md:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr] gap-10 md:gap-14 items-center">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
 
-          {/* TEXT */}
-          <div className="flex flex-col justify-center">
-            <h2 className="font-playfair text-2xl md:text-4xl font-bold text-brand-primary
-                           text-center md:text-left mb-5">
-              The Meaning of SUNHOM
-            </h2>
-
-            {/* Accent line */}
-            <div className="w-20 h-[2px] bg-brand-primary/30 mb-6
-                            mx-auto md:mx-0" />
-
-            <div className="space-y-4 md:text-left">
-              <p className="font-epilogue text-lg leading-relaxed text-black">
-                SUNHOM was born from a simple belief shared by its founder,
-                <strong> Vishal Gndhi</strong> — luxury should feel natural,
-                last long, and never feel out of reach.
-              </p>
-
-              <p className="font-epilogue text-lg leading-relaxed text-black">
-                Each product is thoughtfully crafted using clean ingredients,
-                refined fragrances, and slow, intentional processes —
-                designed to elevate everyday moments without excess.
-              </p>
-
-              <p className="font-epilogue text-lg leading-relaxed text-black">
-                From calm evenings to quiet celebrations, SUNHOM brings warmth
-                and presence into spaces where people pause, breathe, and feel at home.
-              </p>
-
-              <p className="font-epilogue text-lg leading-relaxed text-black">
-                SUNHOM stands for quiet confidence — premium, honest,
-                and made for everyone who believes luxury should be felt,
-                not waited for.
-              </p>
+          {/* FOUNDER IMAGE */}
+          <div
+            className={`relative transition-all duration-1000 ease-out ${
+              isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
+            }`}
+          >
+            <div className="relative w-full h-[420px] md:h-[520px] rounded-3xl overflow-hidden shadow-xl">
+              <Image
+                src="/photo/founder.png"   // replace with your image path
+                alt="Founder of SUNHOM"
+                fill
+                className="object-cover"
+                priority
+              />
             </div>
           </div>
 
-          {/* VIDEO */}
-          <div className="flex justify-center md:justify-end">
-            <div className="relative w-[260px] sm:w-[300px] md:w-[320px]
-                            aspect-[9/16] rounded-3xl overflow-hidden shadow-xl bg-black">
+          {/* TEXT CONTENT */}
+          <div
+            className={`transition-all duration-1000 ease-out ${
+              isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"
+            }`}
+          >
+            <h2 className="font-playfair text-3xl md:text-4xl text-amber-700 mb-6">
+              The Meaning Behind SUNHOM
+            </h2>
 
-              <video
-                ref={videoRef}
-                className="w-full h-full object-contain bg-black"
-                playsInline
-                muted
-                onEnded={resetVideo}
-                controls={isPlaying}
-              >
-                <source src="/media/founder_story.mp4" type="video/mp4" />
-              </video>
+            <div className="w-20 h-[2px] bg-[#1F4D3B]/30 mb-8" />
 
-              {!isPlaying && (
-                <button
-                  onClick={playVideo}
-                  className="absolute inset-0 flex items-center justify-center
-                             bg-black/20 hover:bg-black/30 transition"
-                  aria-label="Play founder story"
-                >
-                  <div className="w-14 h-14 rounded-full bg-white
-                                  flex items-center justify-center shadow-lg">
-                    <span className="text-xl ml-1 text-brand-primary">▶</span>
-                  </div>
-                </button>
-              )}
+            <div className="space-y-6">
+              <p className="font-epilogue text-lg leading-relaxed text-[#333]">
+                <b>SUNHOM</b> was founded on a simple belief — luxury should feel
+                natural, refined, and accessible. It should not belong to a
+                select few, but to everyone who values comfort and presence.
+              </p>
 
+              <p className="font-epilogue text-lg leading-relaxed text-[#333]">
+                Inspired by the idea that everyday spaces deserve thoughtful
+                detail, the brand was created to offer premium ambience without
+                excess or extravagance.
+              </p>
+
+              <p className="font-epilogue text-lg leading-relaxed text-[#333]">
+                From car diffusers and camphor sachets to soy wax candles,
+                each product is crafted with clean ingredients and a
+                commitment to quality — designed to bring quiet luxury
+                into daily life.
+              </p>
+
+              <p className="font-epilogue text-lg leading-relaxed text-[#333]">
+                <b>SUNHOM</b> stands for confidence without noise —
+                luxury that feels personal, honest, and within reach.
+              </p>
             </div>
           </div>
 
