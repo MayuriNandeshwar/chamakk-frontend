@@ -1,8 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { X, User } from "lucide-react";
+import { X, User, ChevronDown } from "lucide-react";
 
 export default function MobileMenu({
   open,
@@ -11,24 +12,25 @@ export default function MobileMenu({
   open: boolean;
   onClose: () => void;
 }) {
+
+  const [collectionOpen, setCollectionOpen] = useState(false);
+
   return (
     <div
       className={`fixed inset-0 z-[100] bg-[#F7F5F2] transition-transform duration-300
       ${open ? "translate-x-0" : "-translate-x-full"}`}
     >
-      {/* HEADER — HEIGHT REDUCED */}
-      <div className="px-6 py-3 min-h-[56px] flex items-center justify-between border-b border-[var(--border-soft)]">
-        {/* LOGO — SIZE UNCHANGED */}
+
+      {/* HEADER */}
+      <div className="px-6 py-4 flex items-center justify-between border-b border-[var(--border-soft)]">
         <Image
           src="/logo/sunhomtrans.png"
           alt="SUNHOM"
           width={120}
           height={40}
           priority
-          className="object-contain"
         />
 
-        {/* CLOSE ICON */}
         <button onClick={onClose} aria-label="Close menu">
           <X className="w-5 h-5 text-[var(--text-heading)]" />
         </button>
@@ -36,27 +38,98 @@ export default function MobileMenu({
 
       {/* NAV LINKS */}
       <nav className="p-6 space-y-6 font-epilogue text-sm">
-        {[
-          { label: "Home", href: "/" },
-          { label: "Collections", href: "/products" },
-          { label: "Our Story", href: "/our-story" },
-          { label: "About Us", href: "/about-us" },
-          { label: "Contact", href: "/contact-us" },
-        ].map(({ label, href }) => (
-          <Link
-            key={label}
-            href={href}
-            onClick={onClose}
-            className="block border-b border-[var(--border-soft)] pb-3 text-[var(--text-heading)]"
+
+        {/* HOME */}
+        <Link
+          href="/"
+          onClick={onClose}
+          className="block border-b border-[var(--border-soft)] pb-3 text-[var(--text-heading)]"
+        >
+          Home
+        </Link>
+
+        {/* COLLECTIONS ACCORDION */}
+        <div className="border-b border-[var(--border-soft)] pb-3">
+
+          <button
+            onClick={() => setCollectionOpen(!collectionOpen)}
+            className="flex items-center justify-between w-full text-[var(--text-heading)]"
           >
-            {label}
-          </Link>
-        ))}
+            <span>Collections</span>
+
+            <ChevronDown
+              className={`w-4 h-4 transition-transform duration-300 text-[var(--text-heading)] ${
+                collectionOpen ? "rotate-180" : ""
+              }`}
+            />
+          </button>
+
+          <div
+            className={`
+              overflow-hidden transition-all duration-300
+              ${collectionOpen ? "max-h-40 mt-4" : "max-h-0"}
+            `}
+          >
+            <div className="space-y-4 pl-4 text-[13px]">
+
+              <Link
+                href="/collections/drive"
+                onClick={onClose}
+                className="block text-black hover:text-[var(--brand-gold)] transition"
+              >
+                Drive Collection
+              </Link>
+
+              <Link
+                href="/collections/pure-air-rituals"
+                onClick={onClose}
+                className="block text-black hover:text-[var(--brand-gold)] transition"
+              >
+                Pure Air Rituals
+              </Link>
+
+              <Link
+                href="/collections/signature-candles"
+                onClick={onClose}
+                className="block text-black hover:text-[var(--brand-gold)] transition"
+              >
+                Signature Candle Collection
+              </Link>
+
+            </div>
+          </div>
+        </div>
+
+        {/* OTHER LINKS */}
+        <Link
+          href="/our-story"
+          onClick={onClose}
+          className="block border-b border-[var(--border-soft)] pb-3 text-[var(--text-heading)]"
+        >
+          Our Story
+        </Link>
+
+        <Link
+          href="/about-us"
+          onClick={onClose}
+          className="block border-b border-[var(--border-soft)] pb-3 text-[var(--text-heading)]"
+        >
+          About Us
+        </Link>
+
+        <Link
+          href="/contact-us"
+          onClick={onClose}
+          className="block border-b border-[var(--border-soft)] pb-3 text-[var(--text-heading)]"
+        >
+          Contact
+        </Link>
+
       </nav>
 
-      {/* LOGIN — FIXED AT BOTTOM */}
+      {/* LOGIN */}
       <div className="absolute bottom-6 left-6 right-6">
-        <button className="flex items-center gap-3 text-sm font-epilogue text-[var(--text-heading)]">
+        <button className="flex items-center gap-3 text-sm text-[var(--text-heading)]">
           <span className="w-9 h-9 rounded-full bg-black/5 flex items-center justify-center">
             <User className="w-5 h-5" />
           </span>
@@ -65,4 +138,4 @@ export default function MobileMenu({
       </div>
     </div>
   );
-}
+} 

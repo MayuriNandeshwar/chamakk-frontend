@@ -30,7 +30,7 @@ export default function UtilityBar() {
   if (!visible) return null;
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-[60] h-10 bg-[#01594a] overflow-hidden">
+    <div className="fixed top-0 left-0 right-0 z-[60] h-10 bg-[#014338] overflow-hidden">
       <Link href="/shop" className="flex h-full items-center">
         <div className="sunhom-track flex items-center">
 

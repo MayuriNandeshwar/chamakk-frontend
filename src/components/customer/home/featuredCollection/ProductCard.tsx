@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Heart } from 'lucide-react';
 import { useState } from 'react';
-import { BestsellerProduct } from '@/lib/api/home/products.service';
+import { BestsellerProduct } from '@/lib/api/home/bestseller/products.service';
 
 export default function ProductCard({ product }: { product: BestsellerProduct }) {
   const images = product.images ?? [product.imageUrl];

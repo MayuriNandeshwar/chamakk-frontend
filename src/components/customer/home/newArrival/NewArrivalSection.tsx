@@ -1,18 +1,20 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { productService, BestsellerProduct } from '@/lib/api/home/products.service';
-import ProductCard from './ProductCard';
 import Link from 'next/link';
+import { newArrivalService, NewArrivalProduct } from '@/lib/api/home/newArrival/products.service';
+import ProductCard from './ProductCard';
 
 export default function NewArrivalSection() {
-  const [products, setProducts] = useState<BestsellerProduct[]>([]);
+  const [products, setProducts] = useState<NewArrivalProduct[]>([]);
   const scrollerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    productService.getBestsellers().then(res => {
-      setProducts(res.data);
-    });
+    newArrivalService.getNewArrivals(8)
+      .then(res => setProducts(res.data))
+      .catch(err => {
+        console.error('New arrivals failed:', err);
+      });
   }, []);
 
   const scroll = (direction: 'left' | 'right') => {
@@ -33,14 +35,16 @@ export default function NewArrivalSection() {
       <div className="max-w-7xl mx-auto px-4">
 
         {/* HEADER */}
-        <div className="max-w-4xl mx-auto px-6 text-center mb-12">
+        <div className="max-w-4xl mx-auto text-center mb-12">
+  
+
           <h2 className="font-playfair text-3xl md:text-4xl text-amber-700 mb-6">
             The Latest Expressions
           </h2>
 
           <p className="font-epilogue text-lg text-[#333] leading-relaxed">
-            An evolving collection of scent and ambience — created to enrich
-            modern spaces with effortless luxury and quiet refinement.
+            An evolving collection of scent and ambience — crafted
+            to elevate modern spaces with understated luxury.
           </p>
         </div>
 
@@ -74,24 +78,12 @@ export default function NewArrivalSection() {
             {products.map(product => (
               <div
                 key={product.productId}
-                className="min-w-[80%] sm:min-w-[45%] md:min-w-[30%]"
+                className="min-w-[85%] sm:min-w-[45%] md:min-w-[30%]"
               >
                 <ProductCard product={product} />
               </div>
             ))}
           </div>
-        </div>
-
-        {/* CTA BUTTON (Properly Centered) */}
-        <div className="flex justify-center mt-8">
-          <Link
-            href="/products?featured=true"
-            className="px-12 py-4 rounded-full bg-amber-600 text-white font-semibold 
-                       hover:bg-amber-700 hover:scale-105 shadow-xl hover:shadow-2xl 
-                       transition-all duration-300 inline-block"
-          >
-            View New Collection →
-          </Link>
         </div>
 
       </div>

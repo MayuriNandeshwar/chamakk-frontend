@@ -86,30 +86,124 @@ export default function Navbar() {
           </Link>
 
           {/* DESKTOP NAV */}
-          <div className="hidden lg:flex items-center gap-10 font-epilogue text-sm tracking-wide">
-            {[
-              { label: "Home", href: "/" },
-              { label: "Collections", href: "/products" },
-              { label: "Our Story", href: "/our-story" },
-              { label: "About Us", href: "/about-us" },
-              { label: "Contact", href: "/contact-us" },
-            ].map(({ label, href }) => (
+            <div className="hidden lg:flex items-center gap-10 font-epilogue text-sm tracking-wide relative">
+
+              {/* HOME */}
               <Link
-                key={label}
-                href={href}
-                className={`
-                  transition-colors
-                  ${
-                    isTransparent
-                      ? "text-white hover:text-[var(--brand-gold)]"
-                      : "text-[var(--text-heading)] hover:text-[var(--brand-gold)]"
-                  }
-                `}
+                href="/"
+                className={`transition-colors ${
+                  isTransparent
+                    ? "text-white hover:text-[var(--brand-gold)]"
+                    : "text-[var(--text-heading)] hover:text-[var(--brand-gold)]"
+                }`}
               >
-                {label}
+                Home
               </Link>
-            ))}
-          </div>
+
+              {/* COLLECTIONS DROPDOWN */}
+              <div className="relative group">
+
+                <button
+                  className={`
+                    flex items-center gap-1 transition-colors
+                    ${
+                      isTransparent
+                        ? "text-white hover:text-[var(--brand-gold)]"
+                        : "text-[var(--text-heading)] hover:text-[var(--brand-gold)]"
+                    }
+                  `}
+                >
+                  Collections
+
+                  <span
+                    className={`
+                      text-xs transition-transform duration-300
+                      group-hover:rotate-180
+                      ${
+                        isTransparent
+                          ? "text-white"
+                          : "text-[var(--text-heading)]"
+                      }
+                    `}
+                  >
+                    ▼
+                  </span>
+                </button>
+
+                <div
+                  className={`
+                    absolute left-1/2 -translate-x-1/2 top-full mt-5
+                    w-64 rounded-2xl
+                    opacity-0 invisible
+                    group-hover:opacity-100 group-hover:visible
+                    transition-all duration-300
+                    py-6 px-6 space-y-5
+                    ${
+                      isTransparent
+                        ? "bg-white/20 backdrop-blur-lg border border-white/30"
+                        : "bg-[rgba(246,239,227,0.98)] shadow-xl border border-[var(--border-soft)]"
+                    }
+                  `}
+                >
+
+                  {[
+                    { label: "Drive Collection", href: "/collections/drive" },
+                    { label: "Pure Air Rituals", href: "/collections/pure-air-rituals" },
+                    { label: "Signature Candle Collection", href: "/collections/signature-candles" },
+                  ].map(({ label, href }) => (
+                    <Link
+                      key={label}
+                      href={href}
+                      className={`
+                        block font-epilogue text-sm tracking-wide transition-colors
+                        ${
+                          isTransparent
+                            ? "text-white hover:text-[var(--brand-gold)]"
+                            : "text-[var(--text-heading)] hover:text-[var(--brand-gold)]"
+                        }
+                      `}
+                    >
+                      {label}
+                    </Link>
+                  ))}
+
+                </div>
+              </div>
+              {/* OTHER LINKS */}
+              <Link
+                href="/our-story"
+                className={`transition-colors ${
+                  isTransparent
+                    ? "text-white hover:text-[var(--brand-gold)]"
+                    : "text-[var(--text-heading)] hover:text-[var(--brand-gold)]"
+                }`}
+              >
+                Our Story
+              </Link>
+
+              <Link
+                href="/about-us"
+                className={`transition-colors ${
+                  isTransparent
+                    ? "text-white hover:text-[var(--brand-gold)]"
+                    : "text-[var(--text-heading)] hover:text-[var(--brand-gold)]"
+                }`}
+              >
+                About Us
+              </Link>
+
+              <Link
+                href="/contact-us"
+                className={`transition-colors ${
+                  isTransparent
+                    ? "text-white hover:text-[var(--brand-gold)]"
+                    : "text-[var(--text-heading)] hover:text-[var(--brand-gold)]"
+                }`}
+              >
+                Contact
+              </Link>
+
+            </div>
 
           {/* ICONS */}
           <div
